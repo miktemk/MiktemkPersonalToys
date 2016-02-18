@@ -52,7 +52,7 @@ namespace MeditationTools.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int StopMed2MinSec {
             get {
                 return ((int)(this["StopMed2MinSec"]));
@@ -61,10 +61,19 @@ namespace MeditationTools.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
         public int StopMed2MaxSec {
             get {
                 return ((int)(this["StopMed2MaxSec"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int AnimationsDelay {
+            get {
+                return ((int)(this["AnimationsDelay"]));
             }
         }
     }

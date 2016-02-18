@@ -12,9 +12,10 @@ namespace MeditationTools
     {
         public InvokeAtRandomIntervals MeditateOnStop { get; private set; }
         public InvokeAtRandomIntervals MeditateOnStopQuicker { get; private set; }
+        public AnimatedPaintThread CurAnimation { get; private set; }
         private AudioPlaya playa;
 
-        public MeditationToolbox()
+        public MeditationToolbox(AnimatedPaint_IContainer animatedPaint_iContainer)
         {
             var stopFilename = UtilsIO.GetFileFromThisAppDirectory(Settings.Default.StopMp3Filename);
             MeditateOnStop = new InvokeAtRandomIntervals(
@@ -42,6 +43,15 @@ namespace MeditationTools
                         playaDone = null;
                     };
                 });
+            CurAnimation = new AnimatedPaintThread(animatedPaint_iContainer) {
+                DelayMs = Settings.Default.AnimationsDelay,
+            };
+        }
+
+        public void StartBreathWheel()
+        {
+            CurAnimation.AnimatePainter = new AnimationBreathWheel();
+            CurAnimation.Start();
         }
 
         internal void StopAll()
@@ -50,6 +60,8 @@ namespace MeditationTools
                 MeditateOnStop.Stop();
             if (MeditateOnStopQuicker.IsRunning)
                 MeditateOnStopQuicker.Stop();
+            if (CurAnimation.IsRunning)
+                CurAnimation.Stop();
         }
     }
 }

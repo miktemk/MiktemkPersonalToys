@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Miktemk.Winforms;
 
 namespace MeditationTools
 {
@@ -18,8 +19,21 @@ namespace MeditationTools
         public FormMeditations()
         {
             InitializeComponent();
-            meditations = new MeditationToolbox();
+            CustomComponents();
+            meditations = new MeditationToolbox(new AnimatedPaint_IContainer_WrapControl(panelPaint));
         }
+
+        private void CustomComponents()
+        {
+            panelPaint.Dock = DockStyle.Fill;
+            panelPaint.Visible = false;
+            //var iii = Controls.GetChildIndex(btnBreathWheel);
+            //Controls.SetChildIndex(panelPaint, -1);
+            panelPaint.BringToFront();
+            panelPaint.MakeDoubleBufferedHack();
+        }
+
+        private void FormMeditations_Load(object sender, EventArgs e) {}
 
         private void btnStopMed_Click(object sender, EventArgs e)
         {
@@ -53,5 +67,28 @@ namespace MeditationTools
         {
             meditations.StopAll();
         }
+
+        private void btnBreathWheel_Click(object sender, EventArgs e)
+        {
+            meditations.StartBreathWheel();
+            panelPaint.Visible = true;
+        }
+
+        private void panelPaint_Paint(object sender, PaintEventArgs e)
+        {
+            meditations.CurAnimation.AnimatePainter.DoPaint(e.Graphics, panelPaint.Width, panelPaint.Height);
+        }
+
+        private void FormMeditations_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                meditations.StopAll();
+                panelPaint.Visible = false;
+            }
+        }
+
+
+        
     }
 }
