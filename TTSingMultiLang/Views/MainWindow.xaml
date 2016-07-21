@@ -1,0 +1,64 @@
+﻿<Window x:Class="TTSingMultiLang.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.galasoft.ch/ignore"
+        xmlns:intr="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:mvvmlight ="http://www.galasoft.ch/mvvmlight"
+        xmlns:views="clr-namespace:TTSingMultiLang.Views"
+        mc:Ignorable="d ignore"
+        Height="500"
+        Width="800"
+        Title="MVVM Light Application"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+        Icon="../favicon.ico">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Skins/MainSkin.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <intr:Interaction.Triggers>
+        <intr:EventTrigger EventName="PreviewKeyDown">
+            <mvvmlight:EventToCommand Command="{Binding PreviewKeyDownCommand, Mode=OneWay}" PassEventArgsToCommand="True" />
+        </intr:EventTrigger>
+    </intr:Interaction.Triggers>
+
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <!--<TextBlock Text="{Binding TestText}" />-->
+            <!--<views:CurPhrasePanel
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center" />-->
+            <!--<WebBrowser Height="200" Name="myWebBrowser" ></WebBrowser>-->
+            <!--<RichTextBox Document="{Binding DocuTest}"> </RichTextBox>-->
+            <Button FontSize="36"
+                FontWeight="Bold"
+                Command="{Binding PlayStopCommand}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="Multilang test" />
+            <TextBlock
+                Margin="0,30,0,0"
+                FontSize="36"
+                FontWeight="Bold"
+                Foreground="Purple"
+                HorizontalAlignment="Center"
+                Text="{Binding CurText}" />
+        </StackPanel>
+        <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center">
+            <TextBlock
+                Margin="0,30,0,0"
+                FontSize="28"
+                HorizontalAlignment="Center"
+                Text="{Binding CurIndex}" />
+        </WrapPanel>
+        <Grid>
+            <TextBox Text="{Binding OutputLog}"></TextBox>
+        </Grid>
+    </DockPanel>
+</Window>

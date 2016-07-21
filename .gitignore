@@ -51,3 +51,9 @@ Temporary Items
 #-----------------------------
 MeditationTools/bin/*
 MeditationTools/obj/*
+FilterByCyrillicPhrases/bin/*
+FilterByCyrillicPhrases/obj/*
+Miktemk.TextToSpeech/bin/*
+Miktemk.TextToSpeech/obj/*
+TTSingMultiLang/bin/*
+TTSingMultiLang/obj/*
