@@ -49,6 +49,7 @@ Temporary Items
 
 # compile and build directories
 #-----------------------------
+.vs
 MeditationTools/bin/*
 MeditationTools/obj/*
 FilterByCyrillicPhrases/bin/*
@@ -57,3 +58,12 @@ Miktemk.TextToSpeech/bin/*
 Miktemk.TextToSpeech/obj/*
 TTSingMultiLang/bin/*
 TTSingMultiLang/obj/*
+LingoParsers/.vs
+LingoParsers/ConsoleTests/bin/*
+LingoParsers/ConsoleTests/obj/*
+LingoParsers/IlyaFrankParser/bin/*
+LingoParsers/IlyaFrankParser/obj/*
+LingoParsers/MyTests/bin/*
+LingoParsers/MyTests/obj/*
+LingoParsers/TestResults/bin/*
+LingoParsers/TestResults/obj/*
