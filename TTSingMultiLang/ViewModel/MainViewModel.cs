@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Miktemk;
-using Miktemk.TextToSpeech;
+using Miktemk.TextToSpeech.Core;
 using PropertyChanged;
 using System;
 using System.Windows.Input;
@@ -26,6 +26,12 @@ namespace TTSingMultiLang.ViewModel
         public MainViewModel(ITtsService ttsService)
         {
             this.ttsService = ttsService;
+            //// .... this was a test
+            //ttsService.AddWordCallback((textBeingRead, start, length) =>
+            //{
+            //    // word
+            //    PrependToLog($"[{start}:{length}] {textBeingRead.Substring(start, length)}");
+            //});
 
             //TODO: use config file maybe
             var xmlFile = @"C:\OtherMiktemk\datafiles\german-grammar\german-grammar-split.xml";
@@ -53,16 +59,21 @@ namespace TTSingMultiLang.ViewModel
                 ttsService.StopCurrentSynth();
                 return;
             }
-            //CurText = "WTF????";
             ttsService.SayItAllTestAsync(allText, CurIndex, (curPhrase, index) => {
+                // phrase
                 if (curPhrase.Lang == outputLang)
                 {
                     if (!string.IsNullOrEmpty(CurText))
-                        OutputLog = String.Concat(CurText, "\n", OutputLog);
+                        PrependToLog(CurText);
                     CurText = curPhrase.Text;
                 }
                 CurIndex = index;
             });
+        }
+
+        private void PrependToLog(string text)
+        {
+            OutputLog = String.Concat(text, "\n", OutputLog);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Miktemk.TextToSpeech;
+﻿using Miktemk.TextToSpeech.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,7 @@ namespace TTSingMultiLang.Services
         bool IsPlaying { get; }
 
         void SayItAllTestAsync(MultiLanguageText allText, int startSentence, Action<UniLangPhrase, int> phraseCallback);
+        void AddWordCallback(Action<string, int, int> wordCallback);
         void StopCurrentSynth();
     }
     public class TtsService : ITtsService
@@ -36,7 +37,10 @@ namespace TTSingMultiLang.Services
 
         public bool IsPlaying { get { return synth.IsPlaying; } }
 
-        public void SayItAllTestAsync(MultiLanguageText allText, int startFragment, Action<UniLangPhrase, int> phraseCallback)
+        public void SayItAllTestAsync(
+            MultiLanguageText allText,
+            int startFragment,
+            Action<UniLangPhrase, int> phraseCallback)
         {
             var fragments = allText.Phrases.Skip(startFragment);
             var curIndex = startFragment;
@@ -47,6 +51,13 @@ namespace TTSingMultiLang.Services
                 curIndex++;
                 phraseCallback(phrase, curIndex);
             });
+        }
+
+        public void AddWordCallback(Action<string, int, int> wordCallback)
+        {
+            synth.PhraseProgress += (text, start, length) => {
+                wordCallback(text, start, length);
+            };
         }
 
         public void StopCurrentSynth()

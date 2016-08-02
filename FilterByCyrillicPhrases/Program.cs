@@ -1,4 +1,5 @@
-﻿using Miktemk.TextToSpeech;
+﻿using Miktemk;
+using Miktemk.TextToSpeech.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,11 +33,7 @@ namespace FilterByCyrillicPhrases
                 }
             }
 
-            var serializer = new XmlSerializer(typeof(MultiLanguageText));
-            using (StreamWriter textWriter = new StreamWriter(new FileStream(outFile, FileMode.Create)))
-            {
-                serializer.Serialize(textWriter, allTextStruct);
-            }
+            XmlFactory.WriteToFile(allTextStruct, outFile);
         }
 
         //============================================================
