@@ -12,6 +12,7 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Miktemk.TextToSpeech.Services;
 using TTSingMultiLang.Services;
 
 namespace TTSingMultiLang.ViewModel

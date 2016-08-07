@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using Miktemk;
 using Miktemk.TextToSpeech.Core;
+using Miktemk.TextToSpeech.Services;
 using PropertyChanged;
 using System;
 using System.Windows.Input;
