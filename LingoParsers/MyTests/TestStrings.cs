@@ -5,7 +5,7 @@ using IlyaFrankParser;
 namespace MyTests
 {
     [TestClass]
-    public class UnitTest1
+    public class TestStrings
     {
         [TestMethod]
         public void Test_StripSymbols()
